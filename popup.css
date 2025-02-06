@@ -1,0 +1,182 @@
+body {
+    width: 300px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #1F0036;
+    color: white;
+    margin: 0;
+}
+
+h1 {
+    color: #B54FFF;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.settings-container {
+    background: #2D004F;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 1px solid #4B0082;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #E6B3FF;
+    font-weight: 500;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #6600B3;
+    border-radius: 4px;
+    background-color: #3D0066;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+select:focus {
+    border-color: #B54FFF;
+    box-shadow: 0 0 0 2px rgba(181, 79, 255, 0.2);
+}
+
+select option {
+    background-color: #3D0066;
+    color: white;
+}
+
+.custom-time-inputs {
+    display: none;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.custom-time-inputs.visible {
+    display: flex;
+}
+
+.time-input-group {
+    flex: 1;
+}
+
+.time-input-group label {
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #E6B3FF;
+}
+
+.time-input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #6600B3;
+    border-radius: 4px;
+    background-color: #3D0066;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.time-input-group input:focus {
+    border-color: #B54FFF;
+    box-shadow: 0 0 0 2px rgba(181, 79, 255, 0.2);
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#start {
+    background-color: #00AF43; /* Зелен */
+    color: white;
+}
+
+#stop {
+    background-color: #FF4D4D; /* Червен */
+    color: white;
+    opacity: 0.5;
+}
+
+#start.inactive {
+    background-color: #B0B0B0; /* Сив */
+    opacity: 0.7;
+}
+
+#stop.inactive {
+    background-color: #B0B0B0; /* Сив */
+    opacity: 0.7;
+}
+
+#start.active {
+    background-color: #00AF43; /* Зелен */
+    opacity: 1;
+}
+
+#stop.active {
+    background-color: #FF4D4D; /* Червен */
+    opacity: 1;
+}
+
+#start:hover {
+    background-color: #008f37;
+    box-shadow: 0 0 10px rgba(0, 175, 67, 0.3);
+}
+
+#stop:hover {
+    background-color: #ff3333;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+}
+/* Стилове за списъка с активни табове */
+#activeTabsList {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #E6B3FF;
+}
+
+#activeTabsList li {
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #3D0066;
+    border-radius: 5px;
+    border: 1px solid #6600B3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#activeTabsList li:hover {
+    background-color: #4B0073;
+    box-shadow: 0 0 6px rgba(181, 79, 255, 0.5);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.error-message {
+    color: #FF4D4D;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: none;
+}
