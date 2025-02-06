@@ -3,43 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Refresh</title>
+    <title>Tab Refresher</title>
     <link rel="stylesheet" href="popup.css">
-    <script src="popup.js" defer></script>
 </head>
 <body>
-    <h1>Auto Refresh Settings</h1>
+    <div class="header">
+        <img src="icons/logo.png" alt="Tab Refresher Logo" class="logo">
+        <h1>Tab Refresher</h1>
+    </div>
     <div class="settings-container">
-        <label for="interval">Refresh Interval (seconds):</label>
-        <select id="interval">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
+        <label for="timeOption">Select Interval:</label>
+        <select id="timeOption">
+            <option value="5000">5 seconds</option>
+            <option value="10000">10 seconds</option>
+            <option value="15000">15 seconds</option>
             <option value="custom">Custom</option>
         </select>
-
-        <div class="custom-time-inputs">
+        <div class="custom-time-inputs" id="customTimeInputs">
             <div class="time-input-group">
-                <label for="minutes">Minutes:</label>
-                <input type="number" id="minutes" class="minute" placeholder="Minutes">
+                <label for="customMinutes">Minutes:</label>
+                <input type="number" id="customMinutes" min="0" value="0" placeholder="Minutes">
             </div>
             <div class="time-input-group">
-                <label for="seconds">Seconds:</label>
-                <input type="number" id="seconds" class="second" placeholder="Seconds">
+                <label for="customSeconds">Seconds:</label>
+                <input type="number" id="customSeconds" min="0" placeholder="Seconds">
             </div>
         </div>
-
-        <div class="button-container">
-            <button id="start">Start</button>
-            <button id="stop" class="inactive">Stop</button>
-        </div>
-        
-        <h3>Active Tabs:</h3>
-        <ul id="activeTabsList">
-            <li>Няма активни табове за рефрешване.</li>
-        </ul>
-        
-        <div class="error-message" id="error-message">Please enter a valid custom time.</div>
+        <p class="error-message" id="errorMessage">Please enter valid numbers.</p>
+        <button id="toggleRefresh" class="green">
+            <span id="toggleIcon">▶</span>
+        </button>
     </div>
+    <script src="popup.js"></script>
 </body>
 </html>
