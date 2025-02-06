@@ -12,13 +12,13 @@
         <h1>Tab Refresher</h1>
     </div>
     <div class="settings-container">
-        <label for="timeOption">Select Interval:</label>
-        <select id="timeOption">
-            <option value="5000">5 seconds</option>
-            <option value="10000">10 seconds</option>
-            <option value="15000">15 seconds</option>
-            <option value="custom">Custom</option>
-        </select>
+        <label>Select Interval:</label>
+        <div class="interval-buttons">
+            <button class="interval-btn" data-interval="5000">5 sec</button>
+            <button class="interval-btn" data-interval="10000">10 sec</button>
+            <button class="interval-btn" data-interval="15000">15 sec</button>
+            <button class="interval-btn" data-interval="custom">Custom</button>
+        </div>
         <div class="custom-time-inputs" id="customTimeInputs">
             <div class="time-input-group">
                 <label for="customMinutes">Minutes:</label>
