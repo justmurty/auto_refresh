@@ -15,10 +15,13 @@ chrome.runtime.onStartup.addListener(() => {
             // Restart intervals for saved tabs
             activeTabs[numTabId] = setInterval(() => {
                 chrome.tabs.get(numTabId, function (tab) {
-                    if (tab && tab.url && !tab.url.match(/^chrome:\/\//)) {
+                    // Check if tab URL is not a restricted page
+                    if (tab && tab.url && !tab.url.match(/^chrome:\/\//) && !tab.url.match(/^edge:\/\//) && !tab.url.match(/^about:\/\//)) {
                         chrome.scripting.executeScript({
                             target: { tabId: numTabId },
                             func: () => location.reload()
+                        }).catch(err => {
+                            console.error("Script execution failed:", err);
                         });
                     }
                 });
