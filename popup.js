@@ -114,3 +114,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// [[ Keep Screen Awake ]]
+
+document.getElementById('toggleWakeLock').addEventListener('click', () => {
+    if (wakeLock !== null) {
+        releaseWakeLock();
+    } else {
+        requestWakeLock();
+    }
+});

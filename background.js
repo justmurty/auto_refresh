@@ -75,3 +75,34 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return true; // Important: allows asynchronous sendResponse
     }
 });
+
+// [[ Keep Screen Awake ]]
+
+let wakeLock = null;
+
+async function requestWakeLock() {
+    try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Wake Lock is active.');
+    } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+    }
+}
+
+function releaseWakeLock() {
+    if (wakeLock !== null) {
+        wakeLock.release()
+            .then(() => {
+                wakeLock = null;
+                console.log('Wake Lock has been released.');
+            });
+    }
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+    requestWakeLock();
+});
+
+chrome.runtime.onSuspend.addListener(() => {
+    releaseWakeLock();
+});
