@@ -14,7 +14,6 @@ chrome.runtime.onStartup.addListener(() => {
 
         if (wakeLockActive) {
             chrome.power.requestKeepAwake('display');
-        } else {
         }
 
         chrome.tabs.query({}, function (tabs) {

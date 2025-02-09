@@ -46,6 +46,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 toggleWakeLock.classList.add("active");
                 wakeLockIcon.textContent = "☕";
             }
+
+            // Зареждане на персонализираните стойности за минути и секунди
+            if (customTimes[currentTabId]) {
+                const { minutes, seconds } = customTimes[currentTabId];
+                customMinutes.value = minutes;
+                customSeconds.value = seconds;
+            }
+
+            // Ако избраната стойност е custom, показваме полетата за време
+            if (selectedInterval === "custom") {
+                customTimeInputs.classList.add("visible");
+            }
         });
     });
 
@@ -71,6 +83,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (button.dataset.interval === "custom") {
                 customTimeInputs.classList.add("visible");
                 selectedInterval = "custom";
+                // Когато потребителят избере custom, показваме съществуващите стойности в полетата за време
+                chrome.storage.local.get("customTimes", function (data) {
+                    const customTimes = data.customTimes || {};
+                    const customTime = customTimes[currentTabId] || { minutes: 0, seconds: 0 };
+                    customMinutes.value = customTime.minutes;
+                    customSeconds.value = customTime.seconds;
+                });
             } else {
                 customTimeInputs.classList.remove("visible");
                 selectedInterval = parseInt(button.dataset.interval);
