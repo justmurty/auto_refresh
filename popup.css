@@ -10,22 +10,63 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Разделя заглавието и бутона */
     margin-bottom: 10px;
 }
 
 .logo {
     width: 80px;
     height: 55px;
-    margin-right: 20px;
+    margin-right: 10px;
     border-radius: 8px;
 }
 
 h1 {
     color: #B54FFF;
     font-size: 20px;
-    margin-bottom: 20px;
     font-weight: 600;
+    margin: 0;
+    flex-grow: 1; /* Позволява заглавието да заема наличното място */
+}
+
+.keep-awake-container {
+    display: flex;
+    flex-direction: column; /* Подрежда текста и бутона вертикално */
+    align-items: center;    /* Центрира текста и бутона хоризонтално */
+}
+
+.keep-awake-label {
+    font-size: 12px;
+    color: #E6B3FF;
+    margin-bottom: 5px; /* Разстояние между текста и бутона */
     text-align: center;
+    font-weight: 500;
+}
+
+.header .wake-lock-btn {
+    background-color: #3D0066;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.header .wake-lock-btn:hover {
+    background-color: #4B0073;
+}
+
+.header .wake-lock-btn.active {
+    background-color: #B54FFF;
+}
+
+.header .wake-lock-btn span {
+    margin-left: 5px;
 }
 
 .settings-container {
@@ -139,26 +180,9 @@ input:focus {
 }
 
 .wake-lock-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 20px;
-    background-color: #3D0066;
-    color: white;
-    margin-top: 10px;
-}
-
-.wake-lock-btn:hover {
-    background-color: #4B0073;
-}
-
-.wake-lock-btn.active {
-    background-color: #B54FFF;
+    width: auto; /* Премахваме фиксираната ширина */
+    margin-top: 0; /* Няма нужда от разстояние над бутона */
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 8px;
 }

@@ -13,10 +13,8 @@ chrome.runtime.onStartup.addListener(() => {
         wakeLockActive = data.wakeLockActive || false;
 
         if (wakeLockActive) {
-            console.log("Wake Lock restored: ON");
             chrome.power.requestKeepAwake('display');
         } else {
-            console.log("Wake Lock restored: OFF");
         }
 
         chrome.tabs.query({}, function (tabs) {
@@ -97,15 +95,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             if (!wakeLockActive) {
                 chrome.power.requestKeepAwake('display');
                 wakeLockActive = true;
-                console.log("Wake Lock ENABLED");
             } else {
                 chrome.power.releaseKeepAwake();
                 wakeLockActive = false;
-                console.log("Wake Lock DISABLED");
             }
 
             chrome.storage.local.set({ wakeLockActive: wakeLockActive }, () => {
-                console.log("Wake Lock saved:", wakeLockActive);
                 sendResponse({ status: wakeLockActive ? "active" : "inactive" });
             });
         });
