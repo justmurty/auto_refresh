@@ -137,3 +137,28 @@ input:focus {
     margin-bottom: 10px;
     display: none;
 }
+
+.wake-lock-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    background-color: #3D0066;
+    color: white;
+    margin-top: 10px;
+}
+
+.wake-lock-btn:hover {
+    background-color: #4B0073;
+}
+
+.wake-lock-btn.active {
+    background-color: #B54FFF;
+}
