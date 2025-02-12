@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedInterval = parseInt(button.dataset.interval);
             }
 
+
             chrome.storage.local.get("tabIntervals", function (data) {
                 const tabIntervals = data.tabIntervals || {};
                 tabIntervals[currentTabId] = selectedInterval;

@@ -35,10 +35,15 @@ chrome.runtime.onStartup.addListener(() => {
 
 // Функция за стартиране на опресняването на таб
 function startTabRefresh(tabId, interval) {
+
+    if (activeTabs[tabId]) {
+        clearInterval(activeTabs[tabId]);
+    }
+
     activeTabs[tabId] = setInterval(() => {
         chrome.tabs.get(tabId, function (tab) {
             if (chrome.runtime.lastError || !tab || !tab.url || tab.url.match(/^chrome:\/\//)) {
-                console.warn(`Tab with id ${tabId} does not exist or is restricted.`);
+                console.warn(`Tab ${tabId} does not exist or is restricted.`);
                 clearInterval(activeTabs[tabId]);
                 delete activeTabs[tabId];
                 return;
@@ -53,6 +58,7 @@ function startTabRefresh(tabId, interval) {
         });
     }, interval);
 }
+
 
 // Единен listener за съобщения
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
