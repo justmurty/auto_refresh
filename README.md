@@ -1,12 +1,11 @@
-# Auto Refresh & Click Extension
+# Auto Refresh & Keep Awake Extension
 
-A Chrome and Edge extension that automatically refreshes tabs at custom intervals, clicks elements on a page at specified coordinates, and prevents the computer from going to sleep with the "Keep Awake" feature.
+A Chrome and Edge extension that automatically refreshes tabs at custom intervals, and prevents the computer from going to sleep with the "Keep Awake" feature.
 
 ## Features
 
 - **Auto-refresh** tabs at customizable intervals.
 - **Start/stop refreshing** with a single click.
-- **Click elements** based on coordinates.
 - Support for **custom intervals** (seconds and minutes).
 - **Prevent the computer from sleeping** using the "Keep Awake" feature.
 - Compatible with **Chrome** and **Edge**.
@@ -23,7 +22,6 @@ A Chrome and Edge extension that automatically refreshes tabs at custom interval
 - Open the extension popup.
 - Select the refresh interval or set a custom one.
 - Click "**▶**" to start or "**✖**" to stop the refresh.
-- Click elements by providing **x, y** coordinates.
 - Use the "**Keep Awake**" button to prevent your computer from going to sleep while the extension is running.
 
 ## "Keep Awake" Feature
