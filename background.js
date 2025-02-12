@@ -33,32 +33,42 @@ chrome.runtime.onStartup.addListener(() => {
     });
 });
 
-// Функция за стартиране на опресняването на таб
+// Функция за стартиране на опресняването на таб (използва alarms)
 function startTabRefresh(tabId, interval) {
+    console.log(`Starting refresh for tab ${tabId} every ${interval}ms`);
 
-    if (activeTabs[tabId]) {
-        clearInterval(activeTabs[tabId]);
-    }
+    // Изчистваме стария аларм, ако съществува
+    chrome.alarms.clear(`refresh_${tabId}`);
 
-    activeTabs[tabId] = setInterval(() => {
+    activeTabs[tabId] = { interval: interval };
+
+    // Създаваме нов alarm, който ще работи дори когато Service Worker е inactive
+    chrome.alarms.create(`refresh_${tabId}`, { periodInMinutes: interval / 60000 });
+
+    chrome.storage.local.set({ activeTabs: activeTabs });
+}
+
+// Listener за изпълнение на рефреша при alarm
+chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm.name.startsWith("refresh_")) {
+        let tabId = parseInt(alarm.name.replace("refresh_", ""));
         chrome.tabs.get(tabId, function (tab) {
             if (chrome.runtime.lastError || !tab || !tab.url || tab.url.match(/^chrome:\/\//)) {
-                console.warn(`Tab ${tabId} does not exist or is restricted.`);
-                clearInterval(activeTabs[tabId]);
+                console.warn(`Tab ${tabId} does not exist.`);
+                chrome.alarms.clear(alarm.name);
                 delete activeTabs[tabId];
+                chrome.storage.local.set({ activeTabs: activeTabs });
                 return;
             }
 
+            console.log(`Refreshing tab ${tabId}`);
             chrome.scripting.executeScript({
                 target: { tabId: tabId },
                 func: () => location.reload()
-            }).catch(err => {
-                console.error("Script execution failed:", err);
-            });
+            }).catch(err => console.error("Script execution failed:", err));
         });
-    }, interval);
-}
-
+    }
+});
 
 // Единен listener за съобщения
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -71,8 +81,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 let storedActiveTabs = data.activeTabs || {};
 
                 if (storedActiveTabs[tabId]) {
-                    clearInterval(activeTabs[tabId]);
-                    delete activeTabs[tabId];
+                    // Спиране на опресняването
+                    chrome.alarms.clear(`refresh_${tabId}`);
                     delete storedActiveTabs[tabId];
 
                     chrome.storage.local.set({ activeTabs: storedActiveTabs }, () => {
@@ -81,7 +91,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 } else {
                     const interval = message.interval || 5000;
                     startTabRefresh(tabId, interval);
-
                     storedActiveTabs[tabId] = { interval: interval };
 
                     chrome.storage.local.set({ activeTabs: storedActiveTabs }, () => {

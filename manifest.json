@@ -8,7 +8,8 @@
     "activeTab",
     "scripting",
     "tabs",
-    "power"
+    "power",
+    "alarms"
   ],
   "background": {
     "service_worker": "background.js"
