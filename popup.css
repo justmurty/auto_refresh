@@ -114,6 +114,11 @@ label {
     border-color: #E6B3FF;
 }
 
+.interval-btn.custom-btn {
+    grid-column: span 3; /* Прави бутона "Custom" да заема цял ред */
+    width: 100%; /* Гарантира, че бутонът е на цялата ширина */
+}
+
 input {
     width: 100%;
     padding: 8px;

@@ -114,8 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        console.log("Sending toggleRefresh message with interval:", interval);
-
         chrome.runtime.sendMessage({
             action: "toggleRefresh",
             interval: interval
@@ -138,24 +136,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     toggleWakeLock.addEventListener("click", function () {
-        console.log("Sending toggleWakeLock message...");
 
         chrome.runtime.sendMessage({
             action: "toggleWakeLock"
         }, function (response) {
             if (chrome.runtime.lastError) {
-                console.error("Error sending toggleWakeLock message:", chrome.runtime.lastError);
                 return;
             }
 
             if (response && response.status === "active") {
                 toggleWakeLock.classList.add("active");
                 wakeLockIcon.textContent = "☕";
-                console.log("Wake Lock is now ACTIVE");
             } else {
                 toggleWakeLock.classList.remove("active");
                 wakeLockIcon.textContent = "🛏️";
-                console.log("Wake Lock is now INACTIVE");
             }
         });
     });
