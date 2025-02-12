@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const customTimes = data.customTimes || {};
             const wakeLockActive = data.wakeLockActive || false;
 
-            // Проверка на интервала
             if (tabIntervals[currentTabId]) {
                 selectedInterval = tabIntervals[currentTabId];
                 intervalButtons.forEach(button => {
@@ -34,27 +33,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 intervalButtons[0].classList.add("active");
             }
 
-            // Проверка дали този таб вече е активен
             if (activeTabs[currentTabId]) {
                 toggleButton.classList.remove("green");
                 toggleButton.classList.add("red");
                 toggleIcon.textContent = "✖";
             }
 
-            // Проверка за Wake Lock
             if (wakeLockActive) {
                 toggleWakeLock.classList.add("active");
                 wakeLockIcon.textContent = "☕";
             }
 
-            // Зареждане на персонализираните стойности за минути и секунди
             if (customTimes[currentTabId]) {
                 const { minutes, seconds } = customTimes[currentTabId];
                 customMinutes.value = minutes;
                 customSeconds.value = seconds;
             }
 
-            // Ако избраната стойност е custom, показваме полетата за време
             if (selectedInterval === "custom") {
                 customTimeInputs.classList.add("visible");
             }
@@ -83,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (button.dataset.interval === "custom") {
                 customTimeInputs.classList.add("visible");
                 selectedInterval = "custom";
-                // Когато потребителят избере custom, показваме съществуващите стойности в полетата за време
+
                 chrome.storage.local.get("customTimes", function (data) {
                     const customTimes = data.customTimes || {};
                     const customTime = customTimes[currentTabId] || { minutes: 0, seconds: 0 };
